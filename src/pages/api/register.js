@@ -14,9 +14,9 @@ async function handler(req, res) {
     return res.status(400).json({ error: "Parâmetros inválidos" });
   }
 
-  connection = await pool.getConnection();
   let connection;
   try {
+    connection = await pool.getConnection();
     //Valida se o utlizador já existe
     const [existingUser] = await connection.execute("SELECT id FROM users WHERE username = ?", [username]);
 
