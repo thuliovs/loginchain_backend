@@ -37,8 +37,14 @@ async function handler(req, res) {
     return res.status(201).json({ message: "Utilizador registado com sucesso!" });
   } catch (error) {
     if (connection) connection.release();
-    console.error("Erro ao registar utilizador");
-    return res.status(500).json({ error: "Erro ao registar utilizador" });
+    console.error("Erro detalhado ao registar utilizador:", error);
+    
+    // Mensagem mais informativa para o cliente
+    const errorMessage = error.code === 'ER_DUP_ENTRY' 
+      ? "Utilizador já existe" 
+      : "Erro interno no servidor. Por favor tente novamente";
+
+    return res.status(500).json({ error: errorMessage });
   }
 }
 
