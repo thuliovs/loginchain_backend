@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { allowCors } from "../../../server-apis-nextdatabase-blockchain-main/src/lib/cors";
+import { allowCors } from "../../lib/cors";
 
 // Valida se o metodo que está a ser chamado é o correto : "GET"
 async function handler(req, res) {
